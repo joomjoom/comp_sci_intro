@@ -173,6 +173,17 @@ def isValidWord(word, hand, wordList):
     wordList: list of lowercase strings
     """
     # TO DO ... <-- Remove this comment when you code this function
+    updatedHand = hand.copy()
+    if word in wordList:
+        for letter in word:
+            if updatedHand.get(letter, 0) == 0:
+                return False
+            else:
+                updatedHand[letter] = updatedHand.get(letter, 0) - 1
+        return True
+    else:
+        return False
+    
 
 
 #
@@ -187,6 +198,15 @@ def calculateHandlen(hand):
     returns: integer
     """
     # TO DO... <-- Remove this comment when you code this function
+#   for loop answer
+#    count = 0
+#    for key in hand.keys():
+#        count += hand[key]
+#    return count
+
+#   simple 1 line answer
+    return sum(hand.values())
+
 
 
 
