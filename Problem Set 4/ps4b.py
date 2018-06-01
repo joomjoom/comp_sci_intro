@@ -100,7 +100,7 @@ def compPlayHand(hand, wordList, n):
 # Problem #6: Playing a game
 #
 #
-def playGame(wordList):
+def playGame(wordList, hand=None, userWantsToPlay = None, computerOrUser = None):
     """
     Allow the user to play an arbitrary number of hands.
  
@@ -125,8 +125,46 @@ def playGame(wordList):
     wordList: list (string)
     """
     # TO DO... <-- Remove this comment when you code this function
-    print("playGame not yet implemented.") # <-- Remove this when you code this function
-
+    #print("playGame not yet implemented.") # <-- Remove this when you code this function
+    #userInput = {}
+    
+    while userWantsToPlay != 'e':
+        
+        userWantsToPlay = input("Enter n to deal a new hand, r to replay the last hand, or e to end game: ")
+        if userWantsToPlay == 'r' and hand == None:
+            print('You have not played a hand yet. Please play a new hand first!')
+        
+        elif userWantsToPlay == 'n':
+            computerOrUser = None
+            while not (computerOrUser == 'c' or computerOrUser == 'u'):
+                computerOrUser = input("Enter u to have yourself play, c to have the computer play: ")
+                if computerOrUser != 'c' and computerOrUser != 'u':
+                    print('Invalid command.')
+            if computerOrUser == 'u':
+                hand = dealHand(HAND_SIZE)
+                playHand(hand, wordList, HAND_SIZE)
+            elif computerOrUser == 'c':
+                hand = dealHand(HAND_SIZE)
+                compPlayHand(hand, wordList, HAND_SIZE)
+        
+        elif userWantsToPlay == 'r' and hand != None:
+            computerOrUser = None
+            while not (computerOrUser == 'c' or computerOrUser == 'u'):
+                computerOrUser = input("Enter u to have yourself play, c to have the computer play: ")
+                if computerOrUser != 'c' and computerOrUser != 'u':
+                    print('Invalid command.')
+            if computerOrUser == 'u':
+                playHand(hand, wordList, HAND_SIZE)
+            elif computerOrUser == 'c':
+                compPlayHand(hand, wordList, HAND_SIZE)
+        
+        elif userWantsToPlay == 'e':
+            break
+        
+        else:
+            print('Invalid command.')
+        
+            
         
 #
 # Build data structures used for entire session and play game
